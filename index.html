@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <title>Socket.IO chat</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html,body{ height: 100%;}
+        body { font: 13px Helvetica, Arial; overflow: hidden;}
+        form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 80%; min-width: 700px;}
+        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+        #messages { list-style-type: none; margin: 0; overflow-y: scroll;  height: 100%;  white-space: nowrap; }
+        #messages li { padding: 5px 10px; white-space: normal; word-break: break-all;}
+        #messages li:nth-child(odd) { background: #eee; }
+        #messages li.connection { background-color: #000066; color:white; }
+        #messages li.unconnection { background-color: #660000; color:white;}
+        #conversation {width: 80%; height: 100%;  min-width: 700px; display: inline-block;padding: 0 0 40px 0;}
+        #chat {display: none; height: 100%;}
+        #login form {background-color:#989292; position: absolute;  top: 0;  bottom: inherit;}
+        #login form input{width: 50%;}
+        #login form button{width: 100px;}
+        #user {display: none;}
+        #list {display: inline-block;position: fixed;height: 100%;background: blue;width: 20%;overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+<div id="login">
+    <form action="">
+        <label>Entrez votre pseudo</label>
+        <input id="pseudo" autocomplete="off">
+        <button>Connexion</button>
+    </form>
+</div>
+<div id="chat">
+    <div id="conversation">
+        <div id="user"></div>
+        <ul id="messages"></ul>
+        <form action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
+    </div>
+    <div id="list">
+        <ul id="userList">
+
+        </ul>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://localhost/nodeprojects/socketchat/jquery.js"></script>
+<script>
+    var socket = io();
+
+
+    $('#login form').submit(function(){
+        $('#user').text($('#pseudo').val());
+        $('#login').css('display','none');
+        $('#chat').css('display','block');
+        socket.emit('connect user', $('#pseudo').val());
+        return false;
+    });
+
+    $('#chat form').submit(function(){
+        var user = $('#user').text();
+        var msg = $('#m').val();
+        var send = {user,msg};
+        socket.emit('chat message', send);
+        $('#m').val('');
+        return false;
+    });
+
+    socket.on('connect user', function(user){
+        var msg = user+" est connecté.";
+        $('#messages').append($('<li class="connection">').text(msg));
+        $('#list #userList').text('');
+    });
+
+    socket.on('disconnect user', function(user){
+        var msg = user+" s'est déconnecté.";
+        $('#messages').append($('<li class="unconnection">').text(msg));
+        $('#list #userList').text('');
+    });
+
+    socket.on('user list', function(user){
+        $('#list #userList').append($('<li>').text(user));
+    });
+
+    socket.on('chat message', function(send){
+        var msg = send.user+": "+send.msg;
+        $('#messages').append($('<li>').text(msg));
+    });
+</script>
+</body>
+</html>
