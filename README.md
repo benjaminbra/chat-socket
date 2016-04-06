@@ -21,7 +21,9 @@ https://code.jquery.com/jquery-1.11.1.js
 
 #How to run ?
 
-You just need to use your terminal and move to the folder where is index.js
-After that, just do node index.js
+You just need to use your terminal and move to the folder where is app.js
+After that, just do ``node app.js``
 
-Then you will be able to test it on : localhost:3000
+Then you will be able to test it on : **localhost:3000**
+OR **[ip address]:3000**
+OR **[domain]:3000**
