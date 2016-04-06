@@ -22,13 +22,14 @@ io.on('connection', function(socket){
 
     socket.on('disconnect', function(){
         console.log('a user disconnected');
-
-        var i = allClients.indexOf(socket);
-        allClients.splice(i,1);
-        io.emit('disconnect user', socket.user);
-        allClients.forEach(function(element,index,array){
-            io.emit('user list',element.user);
-        });
+        if(socket.user!=null){
+            var i = allClients.indexOf(socket);
+            allClients.splice(i,1);
+            io.emit('disconnect user', socket.user);
+            allClients.forEach(function(element,index,array){
+                io.emit('user list',element.user);
+            });
+        }
     });
     socket.on('chat message', function(send){
         console.log(send.user+": "+send.msg);
