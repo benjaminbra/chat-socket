@@ -59,7 +59,7 @@
         socket.emit('connect user', $('#pseudo').val());
         return false;
     });
-
+    
     $('#chat form').submit(function(){
         var user = $('#user').text();
         var msg = $('#m').val();
@@ -88,6 +88,13 @@
     socket.on('chat message', function(send){
         var msg = send.user+": "+send.msg;
         $('#messages').append($('<li>').text(msg));
+        //We put a (1) before the title so the person know there is a new message
+         document.title = ' (1) ' + document.title;
+        
+    });
+    //on the focus on the text input we put the title back like it was before
+    $('#m').focusin(function(){
+        document.title = 'Socket.IO chat';
     });
 </script>
 </body>
