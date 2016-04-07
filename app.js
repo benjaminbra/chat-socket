@@ -19,7 +19,6 @@ io.on('connection', function(socket){
             io.emit('user list',element.user);
         });
     });
-
     socket.on('disconnect', function(){
         console.log('a user disconnected');
         if(socket.user!=null){
