@@ -50,7 +50,8 @@
 <script src="http://localhost/nodeprojects/socketchat/jquery.js"></script>
 <script>
     var socket = io();
-
+    var lastMessages = 0;
+    var chatTitle = "Socket.IO chat";
 
     $('#login form').submit(function(){
         $('#user').text($('#pseudo').val());
@@ -89,12 +90,17 @@
         var msg = send.user+": "+send.msg;
         $('#messages').append($('<li>').text(msg));
         //We put a (1) before the title so the person know there is a new message
-         document.title = ' (1) ' + document.title;
-        
+        //document.title = ' (1) ' + document.title;
+        //Add 1 to the "lastMessages" and show it in the doc title
+        lastMessages++;
+        $(document).prop('title','('+lastMessages+") - "+chatTitle);
     });
+
     //on the focus on the text input we put the title back like it was before
     $('#m').focusin(function(){
-        document.title = 'Socket.IO chat';
+        //document.title = 'Socket.IO chat';
+        lastMessages=0;
+        $(document).prop('title',chatTitle);
     });
 </script>
 </body>
