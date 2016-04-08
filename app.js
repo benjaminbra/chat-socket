@@ -1,6 +1,7 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var bot = require('./bot');
 var allClients = [];
 
 app.get('/', function(req, res){
@@ -30,9 +31,13 @@ io.on('connection', function(socket){
             });
         }
     });
-    socket.on('chat message', function(send){
+    socket.on('chat message', function(send){        
         console.log(send.user+": "+send.msg);
         io.emit('chat message', send);
+        if(bot.command(send)){
+            io.emit('chat message',bot.botMessage(send));
+            console.log(send.user+": "+send.msg);
+        }
     });
 });
 
