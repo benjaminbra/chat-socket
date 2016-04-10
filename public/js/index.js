@@ -35,17 +35,31 @@ $('#chat').click(function () {
     clearTitle();
 })
 
+$('#expand').click(function(){
+    $('#list').toggleClass("open");
+});
+
 socket.on('connect user', function(user){
     if(user.channel==channel){
         var msg = user.pseudo+" est connecté.";
         $('#messages').append($('<li class="connection">').text(msg));        
-    }    
+    }
+});
+
+socket.on('disconnect user', function(user){
+    if(user.channel==channel){
+        var msg = user.pseudo+" est déconnecté.";
+        $('#messages').append($('<li class="unconnection">').text(msg));
+    }
+});
+
+socket.on('clear list', function(){
     $('#list #userList').text('');
 });
 
 socket.on('user list', function(user){
     if(user.channel==channel){
-       $('#list #userList').append($('<li>').text(user.pseudo)); 
+       $('#list #userList').append($('<li class="list-group-item">').text(user.pseudo));
     }    
 });
 

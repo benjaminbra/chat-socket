@@ -54,6 +54,7 @@ io.on('connection', function(socket){
 //useful function to make things shorter
 function updateUserList(emit,user){
     io.emit(emit+' user', user);
+    io.emit('clear list');
     userList.forEach(function (e,i,a) {
         io.emit('user list', e.user);
     });

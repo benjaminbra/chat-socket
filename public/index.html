@@ -2,38 +2,60 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Socket.IO chat</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css">
-    <link href="/lib/boostrap/css/bootstrap.css">
+    <link href="lib/boostrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div id="login">
+<div class="col-sm-10 col-xs-12" id="login">
     <form action="" class="form-horizontal">
-        <div class="form-group">
-            <label class="control-label" for="pseudo">Entrez votre pseudo : </label>
-            <input class="form-control" id="pseudo" autocomplete="off">
+        <div class="form-group col-sm-12 col-xs-12">
+            <label class="control-label col-sm-2" for="pseudo">Pseudo</label>
+            <div class="col-sm-8 col-xs-12">
+                <input class="form-control" id="pseudo" autocomplete="off">
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" for="channel">Channel : </label>
-            <input class="form-control" id="channel" autocomplete="off">
+        <div class="form-group col-sm-12 col-xs-12">
+            <label class="control-label col-sm-2" for="channel">Channel</label>
+            <div class="col-sm-8 col-xs-12">
+                <input class="form-control" id="channel" autocomplete="off">
+            </div>
         </div>
-        <div class="form-group">
-            <button class="btn btn-primary">Connexion</button>
+        <div class="form-group col-sm-12 col-xs-12">
+            <div class="col-sm-6">
+                <button class="btn btn-primary">Connexion</button>
+            </div>
         </div>
     </form>
 </div>
-<div id="chat">
-    <div id="conversation">
-        <div id="user"></div>
+<div class="col-sm-12" id="chat">
+    <div class="col-sm-10" id="conversation">
         <ul id="messages"></ul>
-        <form action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
+        <form action="" class="form-horizontal">
+            <div class="form-group col-sm-10 col-xs-10">
+                <div class="col-sm-12">
+                    <input class="form-control" id="m" autocomplete="off" />
+                </div>
+            </div>
+            <div class="form-group col-sm-2 col-xs-2">
+                <div class="col-sm-12">
+                    <button class="btn btn-primary col-sm-12 col-xs-12">Send</button>
+                </div>
+            </div>
         </form>
     </div>
-    <div id="list">
-        <ul id="userList">
+    <div class="col-sm-2" id="list">
+        <div id="expand" class="col-sm-12 col-xs-12">
+            <div class="btn btn-default">
+                <span id="expandList" class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xs-12">
+            <ul id="userList" class="list-group">
 
-        </ul>
+            </ul>
+        </div>
     </div>
 </div>
 <script src="/lib/jquery/jquery.js"></script>
