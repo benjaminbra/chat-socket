@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <title>Socket.IO chat</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/lib/boostrap/css/bootstrap.css">
 </head>
 <body>
 <div id="login">
-    <form action="">
-        <label>Entrez votre pseudo</label>
-        <input id="pseudo" autocomplete="off">
-        <br>
-        <br>
-        <label>Channel : </label>
-        <input id="channel" autocomplete="off">
-        <button>Connexion</button>
+    <form action="" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label" for="pseudo">Entrez votre pseudo : </label>
+            <input class="form-control" id="pseudo" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="channel">Channel : </label>
+            <input class="form-control" id="channel" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary">Connexion</button>
+        </div>
     </form>
 </div>
 <div id="chat">
@@ -31,7 +36,8 @@
         </ul>
     </div>
 </div>
-<script src="/js/jquery.js"></script>
+<script src="/lib/jquery/jquery.js"></script>
+<script src="/lib/boostrap/js/bootstrap.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>
 </body>
