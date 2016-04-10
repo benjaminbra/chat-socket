@@ -11,7 +11,7 @@ var botMessage=function(text,allClients){
             msg = 'hello everyone';            
             break;
         case '!me':
-            msg = 'you are '+text.user;
+            msg = 'you are '+text.pseudo;
             break;
         case '!people':
             msg='there are '+allClients.length+' persons on this chat';
