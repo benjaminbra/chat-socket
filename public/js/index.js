@@ -1,14 +1,17 @@
 var socket = io(),
     newMessagesCount = 0,
+    channel='';
     chatTitle = "Socket.IO chat";
 
 $('#login form').submit(function () {
     $('#login').css('display','none');
+    
     $('#chat').css('display','block');
     var pseudo = $('#pseudo').val();
+    channel = $('#channel').val();
     var user = {
         pseudo:pseudo,
-        channel:"channel1"
+        channel:channel
     };
     socket.emit('connect user',user);
     return false;
@@ -16,7 +19,6 @@ $('#login form').submit(function () {
 
 $('#chat form').submit(function(){
     var msg = $('#m').val(),
-        channel = "channel1",
         send = {
             channel:channel,
             msg:msg
@@ -34,21 +36,27 @@ $('#chat').click(function () {
 })
 
 socket.on('connect user', function(user){
-    var msg = user.pseudo+" est connecté.";
-    $('#messages').append($('<li class="connection">').text(msg));
+    if(user.channel==channel){
+        var msg = user.pseudo+" est connecté.";
+        $('#messages').append($('<li class="connection">').text(msg));        
+    }    
     $('#list #userList').text('');
 });
 
 socket.on('user list', function(user){
-    $('#list #userList').append($('<li>').text(user.pseudo));
+    if(user.channel==channel){
+       $('#list #userList').append($('<li>').text(user.pseudo)); 
+    }    
 });
 
 socket.on('chat message', function(send){
-    var msg = send.pseudo+" : "+send.msg;
-    $('#messages').append($('<li>').text(msg));
-    //Add 1 to the "lastMessages" and show it in the doc title
-    newMessagesCount++;
-    $(document).prop('title', '('+newMessagesCount+") - "+chatTitle);
+    if(send.channel==channel){
+        var msg = send.pseudo+" : "+send.msg;
+        $('#messages').append($('<li>').text(msg));
+        //Add 1 to the "lastMessages" and show it in the doc title
+        newMessagesCount++;
+        $(document).prop('title', '('+newMessagesCount+") - "+chatTitle);
+    }    
 });
 
 socket.on('clear title', function(){

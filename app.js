@@ -46,7 +46,6 @@ io.on('connection', function(socket){
         if(bot.command(send)){
             io.emit('chat message',bot.botMessage(send,userList));
         }
-
         socket.emit('clear title');
     });
 });
