@@ -13,13 +13,13 @@
         <div class="form-group col-sm-12 col-xs-12">
             <label class="control-label col-sm-2" for="pseudo">Pseudo</label>
             <div class="col-sm-8 col-xs-12">
-                <input class="form-control" id="pseudo" autocomplete="off">
+                <input class="form-control" id="pseudo" autocomplete="off" required>
             </div>
         </div>
         <div class="form-group col-sm-12 col-xs-12">
             <label class="control-label col-sm-2" for="channel">Channel</label>
             <div class="col-sm-8 col-xs-12">
-                <input class="form-control" id="channel" autocomplete="off">
+                <input class="form-control" id="channel" autocomplete="off" required>
             </div>
         </div>
         <div class="form-group col-sm-12 col-xs-12">
@@ -35,7 +35,7 @@
         <form action="" class="form-horizontal">
             <div class="form-group col-sm-10 col-xs-10">
                 <div class="col-sm-12">
-                    <input class="form-control" id="m" autocomplete="off" />
+                    <input class="form-control" id="m" autocomplete="off" required/>
                 </div>
             </div>
             <div class="form-group col-sm-2 col-xs-2">
@@ -51,7 +51,7 @@
                 <span id="expandList" class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span>
             </div>
         </div>
-        <div class="col-sm-12 col-xs-12">
+        <div id="listBlock" class="col-sm-12 col-xs-12">
             <ul id="userList" class="list-group">
 
             </ul>

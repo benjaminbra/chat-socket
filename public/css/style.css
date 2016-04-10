@@ -103,12 +103,30 @@ body {
     height: 100%;
     background: #F1F1F1;
     width: 20%;
-    overflow-y: scroll;
+    overflow: hidden;
+    padding: 0;
+}
+
+#list #expand{
+    z-index: 1000;
 }
 
 #list.open{
     position: absolute;
     width: 80%;
     right: 0;
+}
+
+#list #listBlock{
+    height: 100%;
+    margin: -50px 0 0;
+    width: 100%;
+    padding: 0;
+}
+
+#list #userList{
+    overflow-y: scroll;
+    height: 100%;
+    padding: 50px 0 0;
 }
 

@@ -21,10 +21,12 @@ io.on('connection', function(socket){
     console.log("new connection");
 
     socket.on('connect user', function(user){
-        console.log("new user is connected");
-        socket.user = user;
-        userList.push(socket);
-        updateUserList('connect',socket.user);
+        if(user.pseudo!="" && user.pseudo!=""){
+            console.log("new user is connected");
+            socket.user = user;
+            userList.push(socket);
+            updateUserList('connect',socket.user);
+        }
     });
 
     socket.on('disconnect', function () {
@@ -38,15 +40,20 @@ io.on('connection', function(socket){
     });
 
     socket.on('chat message', function(send){
-        send.pseudo = socket.user.pseudo;
-        console.log("["+send.channel+"] "
-                    +send.pseudo
-                    +" : "+send.msg);
-        io.emit('chat message', send);
-        if(bot.command(send)){
-            io.emit('chat message',bot.botMessage(send,userList));
+        if(socket.user==null){
+            socket.emit('refresh user');
         }
-        socket.emit('clear title');
+        if(send.msg!=""){
+            send.pseudo = socket.user.pseudo;
+            console.log("["+send.channel+"] "
+                +send.pseudo
+                +" : "+send.msg);
+            io.emit('chat message', send);
+            if(bot.command(send)){
+                io.emit('chat message',bot.botMessage(send,userList));
+            }
+            socket.emit('clear title');
+        }
     });
 });
 

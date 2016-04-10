@@ -4,16 +4,17 @@ var socket = io(),
     chatTitle = "Socket.IO chat";
 
 $('#login form').submit(function () {
-    $('#login').css('display','none');
-    
-    $('#chat').css('display','block');
-    var pseudo = $('#pseudo').val();
-    channel = $('#channel').val();
-    var user = {
-        pseudo:pseudo,
-        channel:channel
-    };
-    socket.emit('connect user',user);
+    if($('#pseudo').val().trim()!="" && $('#channel').val().trim()!=""){
+        $('#login').css('display','none');
+        $('#chat').css('display','block');
+        var pseudo = $('#pseudo').val().trim();
+        channel = $('#channel').val().trim();
+        var user = {
+            pseudo:pseudo,
+            channel:channel
+        };
+        socket.emit('connect user',user);
+    }
     return false;
 });
 
@@ -21,7 +22,7 @@ $('#chat form').submit(function(){
     var msg = $('#m').val(),
         send = {
             channel:channel,
-            msg:msg
+            msg:msg.trim()
         };
     socket.emit('chat message', send);
     $('#m').val('');
@@ -70,7 +71,8 @@ socket.on('chat message', function(send){
         //Add 1 to the "lastMessages" and show it in the doc title
         newMessagesCount++;
         $(document).prop('title', '('+newMessagesCount+") - "+chatTitle);
-    }    
+        scrollChatDown();
+    }
 });
 
 socket.on('clear title', function(){
@@ -82,6 +84,8 @@ function clearTitle(){
     $(document).prop('title',chatTitle);
 }
 
-function showMessage(user,msg){
-
+function scrollChatDown(){
+    $('#messages').animate({
+        scrollTop: $('#messages').get(0).scrollHeight
+    }, 2000);
 }
