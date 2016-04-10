@@ -46,63 +46,8 @@
         </ul>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<!--<script src="http://localhost/nodeprojects/socketchat/jquery.js"></script>-->
-<script>
-    var socket = io();
-    var lastMessages = 0;
-    var chatTitle = "Socket.IO chat";
-
-    $('#login form').submit(function(){
-        $('#user').text($('#pseudo').val());
-        $('#login').css('display','none');
-        $('#chat').css('display','block');
-        socket.emit('connect user', $('#pseudo').val());
-        return false;
-    });
-    
-    $('#chat form').submit(function(){
-        var user = $('#user').text();
-        var msg = $('#m').val();
-        var send = {user,msg};
-        socket.emit('chat message', send);
-        $('#m').val('');
-        return false;
-    });
-
-    socket.on('connect user', function(user){
-        var msg = user+" est connecté.";
-        $('#messages').append($('<li class="connection">').text(msg));
-        $('#list #userList').text('');
-    });
-
-    socket.on('disconnect user', function(user){
-        var msg = user+" s'est déconnecté.";
-        $('#messages').append($('<li class="unconnection">').text(msg));
-        $('#list #userList').text('');
-    });
-
-    socket.on('user list', function(user){
-        $('#list #userList').append($('<li>').text(user));
-    });
-
-    socket.on('chat message', function(send){
-        var msg = send.user+": "+send.msg;
-        $('#messages').append($('<li>').text(msg));
-        //We put a (1) before the title so the person know there is a new message
-        //document.title = ' (1) ' + document.title;
-        //Add 1 to the "lastMessages" and show it in the doc title
-        lastMessages++;
-        $(document).prop('title','('+lastMessages+") - "+chatTitle);
-    });
-
-    //on the focus on the text input we put the title back like it was before
-    $('#m').focusin(function(){
-        //document.title = 'Socket.IO chat';
-        lastMessages=0;
-        $(document).prop('title',chatTitle);
-    });
-</script>
+<script src="/js/index.js"></script>
 </body>
 </html>
