@@ -22,7 +22,7 @@ io.on('connection', function(socket){
 
     socket.on('connect user', function(user){
         if(user.pseudo!="" && user.pseudo!=""){
-            console.log("new user is connected");
+            console.log(user.pseudo+" just joined the channel #"+user.channel);
             socket.user = user;
             userList.push(socket);
             updateUserList('connect',socket.user);
@@ -30,7 +30,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('disconnect', function () {
-        console.log("a user is disconnected");
+        console.log("someone just left");
         //if user is connected
         if(socket.user!=null){
             var i = userList.indexOf(socket);

@@ -5,6 +5,7 @@ var command = function(text){
 var botMessage=function(text,allClients){  
     var msg='';
     var pseudo = 'BOT';
+    var channel = text.channel;
     switch (text.msg){
         case '!hello':           
             msg = 'hello everyone';            
@@ -23,7 +24,7 @@ var botMessage=function(text,allClients){
             break;
         
     }
-  return {pseudo,msg};
+  return {pseudo,channel,msg};
 }
 
 exports.command = command;
