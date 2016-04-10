@@ -1,5 +1,5 @@
 # chat-socket
-First chat developp with socket.io and Node JS(Javascript)
+First chat developped with socket.io and Node JS(Javascript)
 
 # Pre-requisite
 
