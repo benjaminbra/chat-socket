@@ -44,10 +44,7 @@ io.on('connection', function(socket){
                     +" : "+send.msg);
         io.emit('chat message', send);
         if(bot.command(send)){
-            io.emit('chat message',bot.botMessage(send));
-            console.log("["+send.channel+"] "
-                +send.pseudo+" : "
-                +send.msg);
+            io.emit('chat message',bot.botMessage(send,userList));
         }
 
         socket.emit('clear title');
