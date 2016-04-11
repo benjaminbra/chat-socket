@@ -8,6 +8,7 @@ var express = require('express'),
 
     //Setup modules and specifics variable
     bot = require('./bot'),
+    reader = require('./messages'),
     userList = [];
 
 //Run the server
@@ -44,6 +45,7 @@ io.on('connection', function(socket){
             socket.emit('refresh user');
         }
         if(send.msg!=""){
+            send.msg = reader.readMessage(send.msg);
             send.pseudo = socket.user.pseudo;
             console.log("["+send.channel+"] "
                 +send.pseudo

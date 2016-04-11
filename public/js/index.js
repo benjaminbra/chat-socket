@@ -44,7 +44,8 @@ $('#expand').click(function(){
 socket.on('connect user', function(user){
     if(user.channel==channel){
         var msg = user.pseudo+" est connecté.";
-        $('#messages').append($('<li class="connection">').text(msg));        
+        $('#messages').append($('<li class="connection">').text(msg));
+        scrollChatDown();
     }
 });
 
@@ -52,6 +53,7 @@ socket.on('disconnect user', function(user){
     if(user.channel==channel){
         var msg = user.pseudo+" est déconnecté.";
         $('#messages').append($('<li class="unconnection">').text(msg));
+        scrollChatDown();
     }
 });
 
@@ -61,14 +63,14 @@ socket.on('clear list', function(){
 
 socket.on('user list', function(user){
     if(user.channel==channel){
-       $('#list #userList').append($('<li class="list-group-item">').text(user.pseudo));
-    }    
+        $('#list #userList').append($('<li class="list-group-item">').text(user.pseudo));
+    }
 });
 
 socket.on('chat message', function(send){
     if(send.channel==channel){
         var msg = send.pseudo+" : "+send.msg;
-        $('#messages').append($('<li>').text(msg));
+        $('#messages').append($('<li>').html(msg));
         //Add 1 to the "lastMessages" and show it in the doc title
         newMessagesCount++;
         $(document).prop('title', '('+newMessagesCount+") - "+chatTitle);
