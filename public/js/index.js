@@ -86,9 +86,10 @@ function clearTitle(){
 }
 
 function scrollChatDown(){
-    console.log($('#messages').get(0).scrollHeight);
-    console.log($('#messages li:last-child').position().top+$('#messages li:last-child').height());
-    $('#messages').animate({
-        scrollTop: $('#messages').get(0).scrollHeight
-    }, 2000);
+    var messageHeight = $('#messages').height();
+    var lastLiPos = $('#messages li:last-child').position().top;
+    if(lastLiPos<=messageHeight){
+        $('#messages').scrollTop($('#messages').get(0).scrollHeight);
+    }
+
 }
