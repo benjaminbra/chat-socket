@@ -85,6 +85,8 @@ function clearTitle(){
 }
 
 function scrollChatDown(){
+    console.log($('#messages').get(0).scrollHeight);
+    console.log($('#messages li:last-child').position().top+$('#messages li:last-child').height());
     $('#messages').animate({
         scrollTop: $('#messages').get(0).scrollHeight
     }, 2000);
