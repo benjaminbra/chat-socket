@@ -1,7 +1,7 @@
 var socket = io(),
     newMessagesCount = 0,
     channel='';
-    chatTitle = "Socket.IO chat";
+    chatTitle = "Chat Paleur";
 
 $('#login form').submit(function () {
     if($('#pseudo').val().trim()!="" && $('#channel').val().trim()!=""){
@@ -9,6 +9,7 @@ $('#login form').submit(function () {
         $('#chat').css('display','block');
         var pseudo = $('#pseudo').val().trim();
         channel = $('#channel').val().trim();
+        $('#channel-title').append('#'+channel);
         var user = {
             pseudo:pseudo,
             channel:channel

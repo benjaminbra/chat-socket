@@ -5,12 +5,13 @@ var command = function(text){
 var botMessage=function(text,allClients){  
     var msg='';
     var pseudo = 'BOT';
+    var channel = text.channel;
     switch (text.msg){
         case '!hello':           
             msg = 'hello everyone';            
             break;
         case '!me':
-            msg = 'you are '+text.user;
+            msg = 'you are '+text.pseudo;
             break;
         case '!people':
             msg='there are '+allClients.length+' persons on this chat';
@@ -23,7 +24,7 @@ var botMessage=function(text,allClients){
             break;
         
     }
-  return {pseudo,msg};
+  return {pseudo,channel,msg};
 }
 
 exports.command = command;
