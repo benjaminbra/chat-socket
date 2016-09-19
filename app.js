@@ -9,6 +9,7 @@ var express = require('express'),
     //Setup modules and specifics variable
     bot = require('./bot'),
     reader = require('./messages'),
+    serverList = ["bristol"],
     userList = [];
 
 //Run the server
